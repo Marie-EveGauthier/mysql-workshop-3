@@ -1,0 +1,89 @@
+//List all of the emails associated to AddressBook.id = 100
+
+
+mysql> SELECT ElectronicMail.content AS email, Entry.id AS EntryId, Entry.addressBookId, AddressBook.name AS nameOfAddressBook, AddressBook.id AS AddressBookId FROM ElectronicMail JOIN Entry ON ElectronicMail.entryId = Entry.id JOIN AddressBook ON Entry.addressBookId = AddressBook.id WHERE AddressBook.id = 100 \G;         
+*************************** 1. row ***************************
+            email: tortor.dictum@Nulla.org
+          EntryId: 4897
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 2. row ***************************
+            email: malesuada.fames.ac@Sedeu.co.uk
+          EntryId: 4486
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 3. row ***************************
+            email: velit@vestibulum.co.uk
+          EntryId: 4060
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 4. row ***************************
+            email: tincidunt.congue.turpis@Inmi.net
+          EntryId: 4060
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 5. row ***************************
+            email: vitae.diam@sapienAeneanmassa.com
+          EntryId: 4030
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 6. row ***************************
+            email: Nunc.ac@parturientmontesnascetur.com
+          EntryId: 5243
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 7. row ***************************
+            email: cursus.vestibulum@pellentesqueSeddictum.ca
+          EntryId: 4030
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 8. row ***************************
+            email: nibh.Donec.est@nibh.org
+          EntryId: 4392
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 9. row ***************************
+            email: eu.tellus@ipsum.co.uk
+          EntryId: 5775
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 10. row ***************************
+            email: massa.Quisque.porttitor@enimSednulla.edu
+          EntryId: 5466
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 11. row ***************************
+            email: mauris.blandit.mattis@Integersemelit.net
+          EntryId: 4897
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 12. row ***************************
+            email: eget@viverraMaecenasiaculis.net
+          EntryId: 5593
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 13. row ***************************
+            email: vulputate.posuere.vulputate@liberoDonec.ca
+          EntryId: 5243
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+*************************** 14. row ***************************
+            email: Nam.tempor@nisimagna.co.uk
+          EntryId: 4019
+    addressBookId: 100
+nameOfAddressBook: Sem Industries
+    AddressBookId: 100
+14 rows in set (0.00 sec)
