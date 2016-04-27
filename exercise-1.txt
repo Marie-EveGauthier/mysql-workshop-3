@@ -1,3 +1,80 @@
+/*Reflect the data model shown in schema/addressbook_normalized.png 
+*within database decodemtl_addressbook
+*/
+
+mysql> CREATE DATABASE decodemtl_addressbook;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW DATABASES;
++-----------------------+
+| Database              |
++-----------------------+
+| information_schema    |
+| c9                    |
+| decodemtl_addressbook |
+| mysql                 |
+| performance_schema    |
++-----------------------+
+5 rows in set (0.00 sec)
+
+mysql> USE decodemtl_addressbook;
+Database changed
+
+mysql> CREATE TABLE Account (    -> id int NOT NULL AUTO_INCREMENT,
+    -> PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE Account ADD COLUMN email VARCHAR(255);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Account ADD COLUMN password VARCHAR(40);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Account ADD COLUMN createdOn DATETIME;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Account ADD COLUMN modifiedOn DATETIME;         
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Account;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| email      | varchar(255) | YES  |     | NULL    |                |
+| password   | varchar(40)  | YES  |     | NULL    |                |
+| createdOn  | datetime     | YES  |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE AddressBook (
+    -> id int NOT NULL AUTO_INCREMENT,
+    -> PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE AddressBook ADD COLUMN accountId INT;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE AddressBook ADD COLUMN name VARCHAR(255);       
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE AddressBook ADD COLUMN createdOn DATETIME;      
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE AddressBook ADD COLUMN modifiedOn DATETIME;     
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
 mysql> ALTER TABLE AddressBook  ADD FOREIGN KEY (accountId) REFERENCES  Account(id);
 Query OK, 1100 rows affected (0.23 sec)
 Records: 1100  Duplicates: 0  Warnings: 0
@@ -15,7 +92,31 @@ mysql> DESCRIBE AddressBook;
 5 rows in set (0.00 sec)
 
 
+mysql> CREATE TABLE Entry (
+    -> id int NOT NULL AUTO_INCREMENT,                             
+    -> PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
 
+mysql> ALTER TABLE Entry ADD COLUMN addressBookId INT;             
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Entry ADD COLUMN firstName VARCHAR(255);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Entry ADD COLUMN lastName VARCHAR(255);             
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Entry ADD COLUMN birthday DATETIME;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Entry ADD COLUMN type ENUM('phone', 'address', ' electronic-mail') ;                                                       
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
 
 mysql> ALTER TABLE Entry ADD FOREIGN KEY (addressBookId) REFERENCES AddressBook(id);                                           
 Query OK, 6100 rows affected (0.11 sec)
@@ -36,9 +137,32 @@ mysql> describe Entry;
 
 
 
+mysql> CREATE TABLE Phone (
+    -> id int NOT NULL AUTO_INCREMENT,
+    -> PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE Phone ADD COLUMN entryId INT;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Phone ADD COLUMN type ENUM('home', 'work', 'other');
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Phone ADD COLUMN subtype ENUM('landline', 'cellular', 'fax');                                         
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Phone ADD COLUMN content VARCHAR(255);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
 mysql> ALTER TABLE Phone ADD FOREIGN KEY (entryId) REFERENCES Entry(id);                                            
 Query OK, 2200 rows affected (0.05 sec)
 Records: 2200  Duplicates: 0  Warnings: 0
+
 mysql> describe Phone;
 +---------+-----------------------------------+------+-----+---------+----------------+
 | Field   | Type                              | Null | Key | Default | Extra          |
@@ -51,6 +175,45 @@ mysql> describe Phone;
 +---------+-----------------------------------+------+-----+---------+----------------+
 5 rows in set (0.00 sec)
 
+
+
+mysql> CREATE TABLE Address (
+    -> id int NOT NULL AUTO_INCREMENT,
+    -> PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ALTER TABLE Address ADD COLUMN entryId INT;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Address ADD COLUMN type ENUM('home', 'work', 'other');
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Address ADD COLUMN addressLine1 VARCHAR(255);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Address ADD COLUMN addressLine2 VARCHAR(255);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Address ADD COLUMN city VARCHAR(255);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Address ADD COLUMN province VARCHAR(128);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Address ADD COLUMN country VARCHAR(128);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Address ADD COLUMN postalCode VARCHAR(10);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
 
 mysql> ALTER TABLE Address ADD FOREIGN KEY (entryId) REFERENCES Entry(id);                                                     
 Query OK, 2300 rows affected (0.07 sec)
@@ -71,6 +234,36 @@ mysql> describe Address;
 | postalCode   | varchar(10)                 | YES  |     | NULL    |                |
 +--------------+-----------------------------+------+-----+---------+----------------+
 9 rows in set (0.02 sec)
+
+
+
+mysql> CREATE TABLE ElectronicMail (
+    -> id int NOT NULL AUTO_INCREMENT,
+    -> PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE ElectronicMail ADD COLUMN entryId INT;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE ElectronicMail ADD COLUMN type ENUM('home', 'work', 'other');
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE ElectronicMail ADD COLUMN content VARCHAR(255);Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE ElectronicMail;
++---------+-----------------------------+------+-----+---------+----------------+
+| Field   | Type                        | Null | Key | Default | Extra          |
++---------+-----------------------------+------+-----+---------+----------------+
+| id      | int(11)                     | NO   | PRI | NULL    | auto_increment |
+| entryId | int(11)                     | YES  |     | NULL    |                |
+| type    | enum('home','work','other') | YES  |     | NULL    |                |
+| content | varchar(255)                | YES  |     | NULL    |                |
++---------+-----------------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
 
 mysql> ALTER TABLE ElectronicMail ADD FOREIGN KEY (entryId) REFERENCES Entry(id);                                              
 Query OK, 2300 rows affected (0.12 sec)
