@@ -1,0 +1,29 @@
+List all possible domain name values for ElectronicMail (email@domain.name)
+
+//To find the domain name. (With substring_index, you can find what is coming after the delimeter using a negative number)
+
+SUBSTRING_INDEX(content, '@', -1)
+        
+
+
+SELECT SUBSTRING_INDEX(content, '@', -1) AS domainName 
+FROM ElectronicMail GROUP BY SUBSTRING_INDEX(content, '@', -1);
+
+
+//Is the result with LIMIT 10
++-----------------+
+| domainName      |
++-----------------+
+| a.ca            |
+| a.co.uk         |
+| a.com           |
+| a.edu           |
+| a.net           |
+| aaliquet.com    |
+| aaliquetvel.edu |
+| aarcuSed.org    |
+| ac.co.uk        |
+| ac.com          |
++-----------------+
+10 rows in set (0.01 sec)
+
