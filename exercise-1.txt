@@ -1,0 +1,88 @@
+mysql> ALTER TABLE AddressBook  ADD FOREIGN KEY (accountId) REFERENCES  Account(id);
+Query OK, 1100 rows affected (0.23 sec)
+Records: 1100  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE AddressBook;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| accountId  | int(11)      | YES  | MUL | NULL    |                |
+| name       | varchar(255) | YES  |     | NULL    |                |
+| createdOn  | datetime     | YES  |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+
+
+
+mysql> ALTER TABLE Entry ADD FOREIGN KEY (addressBookId) REFERENCES AddressBook(id);                                           
+Query OK, 6100 rows affected (0.11 sec)
+Records: 6100  Duplicates: 0  Warnings: 0
+
+mysql> describe Entry;
++---------------+-------------------------------------------+------+-----+---------+----------------+
+| Field         | Type                                      | Null | Key | Default | Extra          |
++---------------+-------------------------------------------+------+-----+---------+----------------+
+| id            | int(11)                                   | NO   | PRI | NULL    | auto_increment |
+| addressBookId | int(11)                                   | YES  | MUL | NULL    |                |
+| firstName     | varchar(255)                              | YES  |     | NULL    |                |
+| lastName      | varchar(255)                              | YES  |     | NULL    |                |
+| birthday      | datetime                                  | YES  |     | NULL    |                |
+| type          | enum('phone','address','electronic-mail') | YES  |     | NULL    |                |
++---------------+-------------------------------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+
+
+mysql> ALTER TABLE Phone ADD FOREIGN KEY (entryId) REFERENCES Entry(id);                                            
+Query OK, 2200 rows affected (0.05 sec)
+Records: 2200  Duplicates: 0  Warnings: 0
+mysql> describe Phone;
++---------+-----------------------------------+------+-----+---------+----------------+
+| Field   | Type                              | Null | Key | Default | Extra          |
++---------+-----------------------------------+------+-----+---------+----------------+
+| id      | int(11)                           | NO   | PRI | NULL    | auto_increment |
+| entryId | int(11)                           | YES  | MUL | NULL    |                |
+| type    | enum('home','work','other')       | YES  |     | NULL    |                |
+| subtype | enum('landline','cellular','fax') | YES  |     | NULL    |                |
+| content | varchar(255)                      | YES  |     | NULL    |                |
++---------+-----------------------------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+
+mysql> ALTER TABLE Address ADD FOREIGN KEY (entryId) REFERENCES Entry(id);                                                     
+Query OK, 2300 rows affected (0.07 sec)
+Records: 2300  Duplicates: 0  Warnings: 0
+
+mysql> describe Address;
++--------------+-----------------------------+------+-----+---------+----------------+
+| Field        | Type                        | Null | Key | Default | Extra          |
++--------------+-----------------------------+------+-----+---------+----------------+
+| id           | int(11)                     | NO   | PRI | NULL    | auto_increment |
+| entryId      | int(11)                     | YES  | MUL | NULL    |                |
+| type         | enum('home','work','other') | YES  |     | NULL    |                |
+| addressLine1 | varchar(255)                | YES  |     | NULL    |                |
+| addressLine2 | varchar(255)                | YES  |     | NULL    |                |
+| city         | varchar(255)                | YES  |     | NULL    |                |
+| province     | varchar(128)                | YES  |     | NULL    |                |
+| country      | varchar(128)                | YES  |     | NULL    |                |
+| postalCode   | varchar(10)                 | YES  |     | NULL    |                |
++--------------+-----------------------------+------+-----+---------+----------------+
+9 rows in set (0.02 sec)
+
+mysql> ALTER TABLE ElectronicMail ADD FOREIGN KEY (entryId) REFERENCES Entry(id);                                              
+Query OK, 2300 rows affected (0.12 sec)
+Records: 2300  Duplicates: 0  Warnings: 0
+
+mysql> describe ElectronicMail;
++---------+-----------------------------+------+-----+---------+----------------+
+| Field   | Type                        | Null | Key | Default | Extra          |
++---------+-----------------------------+------+-----+---------+----------------+
+| id      | int(11)                     | NO   | PRI | NULL    | auto_increment |
+| entryId | int(11)                     | YES  | MUL | NULL    |                |
+| type    | enum('home','work','other') | YES  |     | NULL    |                |
+| content | varchar(255)                | YES  |     | NULL    |                |
++---------+-----------------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
