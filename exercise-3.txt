@@ -1,0 +1,26 @@
+//List all of the countries with respective occurence totals in DESC order
+
+mysql> SELECT country, COUNT(*) FROM Address GROUP BY country ORDER BY COUNT(*) DESC;  
+
+
+// Country names should all appear lowercase
+
+mysql> SELECT LOWER(country) FROM Address;
+
+// Both in one, but with only 10 examples because there are too much SQL Query results
+mysql> SELECT COUNT(country),LOWER(country)  FROM Address GROUP BY country ORDER BY COUNT(*) DESC LIMIT 10;                                                                
++----------------+----------------------------------------------+
+| COUNT(country) | LOWER(country)                               |
++----------------+----------------------------------------------+
+|             18 | mozambique                                   |
+|             16 | saint helena, ascension and tristan da cunha |
+|             15 | canada                                       |
+|             15 | argentina                                    |
+|             15 | lebanon                                      |
+|             15 | wallis and futuna                            |
+|             15 | curaçao                                      |
+|             15 | thailand                                     |
+|             15 | united states minor outlying islands         |
+|             15 | andorra                                      |
++----------------+----------------------------------------------+
+10 rows in set (0.00 sec)
