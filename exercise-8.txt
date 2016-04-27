@@ -1,0 +1,24 @@
+List how many phones were landlines, cellular and fax for entries with birthdates between October 1950 and October 1960
+
+//To find birthdates between October 1950 and October 1960
+CAST(birthday AS DATE) BETWEEN '1950-10-1' AND '1960-10-31';
+
+//To find how many of each Phone.subtype
+SUM(p.subtype = 'landline') AS numberOfLandline,
+SUM(p.subtype = 'cellular') AS numberOfCellular,
+SUM(p.subtype = 'fax') AS numberOfFax
+
+
+mysql> SELECT
+    ->     SUM(p.subtype = 'landline') AS numberOfLandline,
+    ->     SUM(p.subtype = 'cellular') AS numberOfCellular,
+    ->     SUM(p.subtype = 'fax') AS numberOfFax
+    -> FROM Phone p
+    -> JOIN Entry e ON p.entryId=e.id 
+    -> AND CAST(e.birthday AS DATE) BETWEEN '1950-10-1' AND '1960-10-31';
++------------------+------------------+-------------+
+| numberOfLandline | numberOfCellular | numberOfFax |
++------------------+------------------+-------------+
+|              172 |              139 |         135 |
++------------------+------------------+-------------+
+1 row in set (0.02 sec)
