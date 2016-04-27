@@ -1,0 +1,26 @@
+List all of the emails associated to AddressBook.id = 100
+
+ SELECT em.content AS content_ElectronicMail 
+    -> FROM ElectronicMail em 
+    -> JOIN Entry e ON em.entryId=e.id  
+    -> JOIN AddressBook ab ON e.addressBookId=ab.id  AND ab.id=100;
+    
+    +--------------------------------------------+
+| content_ElectronicMail                     |
++--------------------------------------------+
+| Nam.tempor@nisimagna.co.uk                 |
+| vitae.diam@sapienAeneanmassa.com           |
+| cursus.vestibulum@pellentesqueSeddictum.ca |
+| velit@vestibulum.co.uk                     |
+| tincidunt.congue.turpis@Inmi.net           |
+| nibh.Donec.est@nibh.org                    |
+| malesuada.fames.ac@Sedeu.co.uk             |
+| tortor.dictum@Nulla.org                    |
+| mauris.blandit.mattis@Integersemelit.net   |
+| Nunc.ac@parturientmontesnascetur.com       |
+| vulputate.posuere.vulputate@liberoDonec.ca |
+| massa.Quisque.porttitor@enimSednulla.edu   |
+| eget@viverraMaecenasiaculis.net            |
+| eu.tellus@ipsum.co.uk                      |
++--------------------------------------------+
+14 rows in set (0.01 sec)
