@@ -1,0 +1,11 @@
+mysql> SELECT p.type AS PhoneFor, p.subtype AS TypeOfPhone, p.content AS phoneNumbers, p.EntryId AS Phone_EntryId, 
+    -> e.id AS Entry_Id, e.firstName AS Entry_firstName, e.lastName AS Entry_lastName
+    -> FROM Phone p
+    -> JOIN Entry e ON p.entryID=e.id AND e.firstName='Charlotte' AND e.lastName='Jenkins';
++----------+-------------+----------------+---------------+----------+-----------------+----------------+
+| PhoneFor | TypeOfPhone | phoneNumbers   | Phone_EntryId | Entry_Id | Entry_firstName | Entry_lastName |
++----------+-------------+----------------+---------------+----------+-----------------+----------------+
+| other    | fax         | (110) 167-3420 |          1057 |     1057 | Charlotte       | Jenkins        |
+| home     | landline    | (605) 175-1334 |          1057 |     1057 | Charlotte       | Jenkins        |
++----------+-------------+----------------+---------------+----------+-----------------+----------------+
+2 rows in set (0.01 sec)
