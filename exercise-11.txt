@@ -1,0 +1,73 @@
+List all of the cities within the countries of Canada, Austria, Isle of Man, Ireland and Japan.
+
+mysql> 
+    SELECT city 
+    -> FROM Address 
+    -> WHERE 'Canada' IN (country) 
+    -> OR 'Austria' IN (country) 
+    -> OR 'Isle of Man' IN (country) 
+    -> OR 'Ireland' IN (country) 
+    -> OR 'Japan' IN (country);
++----------------+
+| city           |
++----------------+
+| Dubbo          |
+| Ceyhan         |
+| Jackson        |
+| Belfast        |
+| Tauranga       |
+| Rzeszów        |
+| Cartago        |
+| Cagnes-sur-Mer |
+| Ceyhan         |
+| Houston        |
+| Galway         |
+| Pietraroja     |
+| Moulins        |
+| Anápolis       |
+| Assen          |
+| Shimla         |
+| ?slahiye       |
+| Kailua         |
+| Edmundston     |
+| Satara         |
+| Angers         |
+| Siedlce        |
+| Chestermere    |
+| Tirrases       |
+| Zwickau        |
+| Belfast        |
+| Horsham        |
+| Chartres       |
+| Rollegem       |
+| Kraków         |
+| Bremerhaven    |
+| Milena         |
+| Cork           |
+| Bozeman        |
+| Pontevedra     |
+| Bodmin         |
+| Ogbomosho      |
+| Denderbelle    |
+| Baulers        |
+| San Vicente    |
+| Alness         |
+| Springfield    |
+| Abbeville      |
+| San Francisco  |
+| Lasnigo        |
+| Nagaon         |
+| Terneuzen      |
+| Raj Nandgaon   |
+| Meridian       |
+| Mabompr?       |
+| Calmar         |
+| Hamburg        |
+| Quesada        |
+| Pabianice      |
+| Dover          |
+| Vienna         |
+| Berlin         |
+| Hillsboro      |
++----------------+
+58 rows in set (0.01 sec)
