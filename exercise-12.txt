@@ -1,0 +1,16 @@
+List 100 phone numbers in separated parts: country code, area code and line number
+
+//FOR FORMAT WHERE id > 2000 i.e X-XXX-XXX-XXXX
+SELECT LEFT(content, 1) AS countryCode, 
+    SUBSTRING(content, 3,3) AS areaCode, 
+    RIGHT(content, 8) AS lineNumber
+FROM Phone
+WHERE id>2000 LIMIT 100;
+
+//FOR FORMAT WHERE id < 2000 i.e (XXX) XXX-XXXX
+SELECT SUBSTRING_INDEX(content, '(', 1) AS countryCode, 
+    SUBSTRING(content FROM -13 FOR 3) AS areaCode, 
+    RIGHT(content, 8) AS lineNumber
+FROM Phone
+WHERE id<2000 LIMIT 100;       
+
